@@ -1,14 +1,13 @@
 import java.util.Random;
 
-import jdk.internal.icu.util.CodePointTrie.Fast;
-
 public class Bag<T> implements IBag<T> {
 	private int content = 0;
-	private int capacity = 30;
+	private int capacity;
 	private T[] array;
 	private Random rand;
 
-	public Bag() {
+	public Bag(int initialCapacity) {
+		this.capacity = initialCapacity;
 		this.array = (T[]) new Object[capacity];
 		this.rand = new Random();
 	}
@@ -76,7 +75,7 @@ public class Bag<T> implements IBag<T> {
 	public int getFrequencyOf(T anEntry) {
 		int frequency = 0;
 
-		for (int i = 0; i <= content; i++) {
+		for (int i = 0; i < content; i++) {
 			if (array[i].equals(anEntry)) {
 				frequency++;
 			}
@@ -86,7 +85,7 @@ public class Bag<T> implements IBag<T> {
 	}
 
 	public int getIndexOf(T anEntry) {
-		for (int i = 0; i <= content; i++) {
+		for (int i = 0; i < content; i++) {
 			if (array[i].equals(anEntry)) {
 				return i;
 			}
@@ -95,7 +94,7 @@ public class Bag<T> implements IBag<T> {
 	}
 
 	public boolean contains(T anEntry) {
-		for (int i = 0; i <= content; i++) {
+		for (int i = 0; i < content; i++) {
 			if (array[i].equals(anEntry)) {
 				return true;
 			}
@@ -104,13 +103,13 @@ public class Bag<T> implements IBag<T> {
 	}
 
 	public void clear() {
-		for (int i = 0; i <= content; i++) {
+		for (int i = 0; i < content; i++) {
 			array[i] = null;
 		}
 	}
 
 	public void displayItems() {
-		for (int i = 0; i <= content; i++) {
+		for (int i = 0; i < content; i++) {
 			System.out.println(array[i]);
 		}
 	}
