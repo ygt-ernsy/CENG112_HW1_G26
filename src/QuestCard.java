@@ -1,8 +1,8 @@
 public class QuestCard {
 	private String name;
 
-	public QuestCard() {
-
+	public QuestCard(String initialName) {
+		this.name = initialName;
 	}
 
 	public String toString() {
