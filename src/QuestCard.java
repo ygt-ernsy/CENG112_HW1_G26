@@ -3,6 +3,7 @@ public class QuestCard {
 
 	public QuestCard(String initialName) {
 		this.name = initialName;
+	gjgjhg
 	}
 
 	public String toString() {
