@@ -2,7 +2,8 @@ public class TreasureCard extends QuestCard {
 	private Treasure treasure;
 	private int value;
 
-	public TreasureCard(Treasure initialTreasure, int initialValue) {
+	public TreasureCard(Treasure initialTreasure, int initialValue, String initialName) {
+		super(initialName);
 		this.treasure = initialTreasure;
 		this.value = initialValue;
 	}

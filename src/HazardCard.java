@@ -1,11 +1,11 @@
 
 public class HazardCard extends QuestCard {
 
-	public HazardCard() {
-
+	public HazardCard(String initialName) {
+		super(initialName);
 	}
 
 	public String toString() {
-		return "";
+		return super.toString();
 	}
 }
