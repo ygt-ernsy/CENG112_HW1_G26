@@ -1,5 +1,5 @@
 public class Game {
-	private int numberOfRounds = 0;
+	private int numberOfRounds = 5;
 	private Player player;
 	private Box box;
 	private Chest chest;
@@ -13,13 +13,49 @@ public class Game {
 	public void initializeGameComponents() {
 		box.initializeBox();
 		chest.initializeChest();
+
 	}
 
 	public void claimTreasures(TreasureBox treasureBox) {
-
+		TreasureCard[] treasureBoxArray= (TreasureCard[]) treasureBox.toArray();
+        for (TreasureCard questCard : treasureBoxArray) {
+			Treasure treasureType = questCard.getTreasure();
+			int value = questCard.getValue();
+			for (int i = 0; i < value; i++) {
+				player.addTent(treasureType);
+				chest.remove(treasureType);
+			}
+		}
+		treasureBox.clear();
 	}
 
-	public void Play() {
+	public void play() {
+		for (int i = 0; i < numberOfRounds; i++) {
+            for (int j = 0; j < 3; j++) {
+				int dice_roll=0;
+				do {
+					dice_roll = player.rollDice();
+				}
+				while (dice_roll >= box.getCurrentSize());
+
+				QuestCard round_card=box.removeByIndex(dice_roll);
+				if (round_card instanceof HazardCard) {
+					player.addHazardBox((HazardCard) round_card);
+
+				}
+				else{
+					player.addTreasureBox((TreasureCard) round_card);
+				}
+			}
+        }
+		if(player.getHazardSize() > player.getTreasureSize()){
+			System.out.println(" :( You have more hazard cards than treasure cards. You Lost. ):");
+		}
+		else {
+			System.out.println(" (: You have more treasure cards than hazard cards.You Won!! Your treasure added to tent. :)");
+			claimTreasures(player.getTreasureBox());
+			System.out.println("Your total point is: " + player.calculateScore());
+		}
 
 	}
 }
