@@ -11,7 +11,8 @@ public class Game {
 	}
 
 	public void initializeGameComponents() {
-
+		box.initializeBox();
+		chest.initializeChest();
 	}
 
 	public void claimTreasures(TreasureBox treasureBox) {
