@@ -119,6 +119,12 @@ public class Bag<T> implements IBag<T> {
 	}
 
 	public T[] toArray() {
-		return array;
+		T[] result = (T[]) new Object[content];
+
+		for (int i = 0; i < content; i++) {
+			result[i] = array[i];
+		}
+
+		return result;
 	}
 }

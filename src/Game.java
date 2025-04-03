@@ -1,4 +1,3 @@
-
 public class Game {
 	private int numberOfRounds = 5;
 	private Player player;
@@ -18,21 +17,11 @@ public class Game {
 	}
 
 	public void claimTreasures(TreasureBox treasureBox) {
-		// Assume treasureBox.toArray() returns Object[] as in your original code
+
 		Object[] objArray = treasureBox.toArray();
 
-		// Step 1: Count non-null elements to size the array correctly
-		int nonNullCount = 0;
-		for (int i = 0; i < objArray.length; i++) {
-			if (objArray[i] != null) {
-				nonNullCount++;
-			}
-		}
+		TreasureCard[] treasureBoxArray = new TreasureCard[objArray.length];
 
-		// Step 2: Create a new TreasureCard array of the exact size
-		TreasureCard[] treasureBoxArray = new TreasureCard[nonNullCount];
-
-		// Step 3: Copy non-null elements into the new array
 		int index = 0;
 		for (int i = 0; i < objArray.length; i++) {
 			if (objArray[i] != null) {
@@ -41,7 +30,6 @@ public class Game {
 			}
 		}
 
-		// Step 4: Process the array as before
 		for (int i = 0; i < treasureBoxArray.length; i++) {
 			Treasure treasureType = treasureBoxArray[i].getTreasure();
 			int value = treasureBoxArray[i].getValue();
