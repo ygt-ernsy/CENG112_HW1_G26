@@ -17,6 +17,6 @@ public class TreasureCard extends QuestCard {
 	}
 
 	public String toString() {
-		return "This is: " + treasure + " and it's value is " + value;
+		return "You got lucky. You found "+ value +" "+ this.getName();
 	}
 }
