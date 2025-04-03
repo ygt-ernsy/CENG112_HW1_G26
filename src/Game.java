@@ -17,15 +17,13 @@ public class Game {
 	}
 
 	public void claimTreasures(TreasureBox treasureBox) {
-
 		Object[] objArray = treasureBox.toArray();
-
 		TreasureCard[] treasureBoxArray = new TreasureCard[objArray.length];
 
 		int index = 0;
 		for (int i = 0; i < objArray.length; i++) {
 			if (objArray[i] != null) {
-				treasureBoxArray[index] = (TreasureCard) objArray[i]; // Cast each element
+				treasureBoxArray[index] = (TreasureCard) objArray[i];
 				index++;
 			}
 		}
@@ -43,26 +41,30 @@ public class Game {
 
 	public void play() {
 		for (int i = 0; i < numberOfRounds; i++) {
-			for (int j = 0; j < 3; j++) {
-				int dice_roll = 0;
+            for (int j = 0; j < 3; j++) {
+				int dice_roll=0;
 				do {
 					dice_roll = player.rollDice();
-				} while (dice_roll >= box.getCurrentSize());
+				}
+				while (dice_roll >= box.getCurrentSize());
 
-				QuestCard round_card = box.removeByIndex(dice_roll);
+				QuestCard round_card=box.removeByIndex(dice_roll);
 				if (round_card instanceof HazardCard) {
+					System.out.println(round_card.toString());
 					player.addHazardBox((HazardCard) round_card);
 
-				} else {
+				}
+				else{
+					System.out.println(round_card.toString());
 					player.addTreasureBox((TreasureCard) round_card);
 				}
 			}
-		}
-		if (player.getHazardSize() > player.getTreasureSize()) {
+        }
+		if(player.getHazardSize() > player.getTreasureSize()){
 			System.out.println(" :( You have more hazard cards than treasure cards. You Lost. ):");
-		} else {
-			System.out.println(
-					" (: You have more treasure cards than hazard cards.You Won!! Your treasure added to tent. :)");
+		}
+		else {
+			System.out.println(" (: You have more treasure cards than hazard cards.You Won!! Your treasure added to tent. :)");
 			claimTreasures(player.getTreasureBox());
 			System.out.println("Your total point is: " + player.calculateScore());
 		}
