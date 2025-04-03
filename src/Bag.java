@@ -76,7 +76,7 @@ public class Bag<T> implements IBag<T> {
 		int frequency = 0;
 
 		for (int i = 0; i < content; i++) {
-			if (array[i].equals(anEntry)) {
+			if (array[i].getClass() == anEntry.getClass()) {
 				frequency++;
 			}
 		}
@@ -119,12 +119,10 @@ public class Bag<T> implements IBag<T> {
 	}
 
 	public T[] toArray() {
-		T[] result = (T[]) new Object[content];
-
+		T[] newArray = (T[]) new Object[content];
 		for (int i = 0; i < content; i++) {
-			result[i] = array[i];
+			newArray[i] = array[i];
 		}
-
-		return result;
+		return newArray;
 	}
 }
