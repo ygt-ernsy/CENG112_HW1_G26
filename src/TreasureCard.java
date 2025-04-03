@@ -8,6 +8,14 @@ public class TreasureCard extends QuestCard {
 		this.value = initialValue;
 	}
 
+	public Treasure getTreasure() {
+		return treasure;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
 	public String toString() {
 		return "This is: " + treasure + " and it's value is " + value;
 	}
