@@ -17,6 +17,7 @@ public class Player {
 
     public int rollDice() {
         int randomIndex = rand.nextInt(30) + 1;
+
         return randomIndex;
     }
 
@@ -35,4 +36,26 @@ public class Player {
         return "The username of the player: "+this.name+" and the total point of this player is " + calculateScore();
     }
 
+    public void addTent(Treasure treasure){
+        this.tent.add(treasure);
+    }
+
+    public void addHazardBox(HazardCard hazardCard) {
+        this.hazardBox.add(hazardCard);
+    }
+    public void addTreasureBox(TreasureCard treasureCard) {
+        this.treasureBox.add(treasureCard);
+    }
+
+    public int getHazardSize() {
+        return hazardBox.getCurrentSize();
+    }
+
+    public int getTreasureSize() {
+        return treasureBox.getCurrentSize();
+    }
+
+    public TreasureBox getTreasureBox() {
+        return treasureBox;
+    }
 }
