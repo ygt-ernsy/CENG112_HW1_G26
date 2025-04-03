@@ -1,2 +1,2 @@
-# IZTHEC-CENG_112-HW1
+# IZTECH-CENG_112-G26
 This is the first homework of the CENG112 class: Incan Gold
