@@ -6,7 +6,7 @@ public class QuestCard {
 	}
 
 	public String toString() {
-		return "This card's is: " + name;
+		return "Oh No!! You came across a " + name;
 	}
 
 	public boolean equals(Object obj) {
@@ -15,5 +15,8 @@ public class QuestCard {
 		} else {
 			return false;
 		}
+	}
+	public String getName() {
+		return name;
 	}
 }
