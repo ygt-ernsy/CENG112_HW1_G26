@@ -1,3 +1,4 @@
+
 public class Game {
 	private int numberOfRounds = 5;
 	private Player player;
@@ -17,11 +18,34 @@ public class Game {
 	}
 
 	public void claimTreasures(TreasureBox treasureBox) {
-		TreasureCard[] treasureBoxArray= (TreasureCard[]) treasureBox.toArray();
-        for (TreasureCard questCard : treasureBoxArray) {
-			Treasure treasureType = questCard.getTreasure();
-			int value = questCard.getValue();
-			for (int i = 0; i < value; i++) {
+		// Assume treasureBox.toArray() returns Object[] as in your original code
+		Object[] objArray = treasureBox.toArray();
+
+		// Step 1: Count non-null elements to size the array correctly
+		int nonNullCount = 0;
+		for (int i = 0; i < objArray.length; i++) {
+			if (objArray[i] != null) {
+				nonNullCount++;
+			}
+		}
+
+		// Step 2: Create a new TreasureCard array of the exact size
+		TreasureCard[] treasureBoxArray = new TreasureCard[nonNullCount];
+
+		// Step 3: Copy non-null elements into the new array
+		int index = 0;
+		for (int i = 0; i < objArray.length; i++) {
+			if (objArray[i] != null) {
+				treasureBoxArray[index] = (TreasureCard) objArray[i]; // Cast each element
+				index++;
+			}
+		}
+
+		// Step 4: Process the array as before
+		for (int i = 0; i < treasureBoxArray.length; i++) {
+			Treasure treasureType = treasureBoxArray[i].getTreasure();
+			int value = treasureBoxArray[i].getValue();
+			for (int j = 0; j < value; j++) {
 				player.addTent(treasureType);
 				chest.remove(treasureType);
 			}
@@ -31,28 +55,26 @@ public class Game {
 
 	public void play() {
 		for (int i = 0; i < numberOfRounds; i++) {
-            for (int j = 0; j < 3; j++) {
-				int dice_roll=0;
+			for (int j = 0; j < 3; j++) {
+				int dice_roll = 0;
 				do {
 					dice_roll = player.rollDice();
-				}
-				while (dice_roll >= box.getCurrentSize());
+				} while (dice_roll >= box.getCurrentSize());
 
-				QuestCard round_card=box.removeByIndex(dice_roll);
+				QuestCard round_card = box.removeByIndex(dice_roll);
 				if (round_card instanceof HazardCard) {
 					player.addHazardBox((HazardCard) round_card);
 
-				}
-				else{
+				} else {
 					player.addTreasureBox((TreasureCard) round_card);
 				}
 			}
-        }
-		if(player.getHazardSize() > player.getTreasureSize()){
-			System.out.println(" :( You have more hazard cards than treasure cards. You Lost. ):");
 		}
-		else {
-			System.out.println(" (: You have more treasure cards than hazard cards.You Won!! Your treasure added to tent. :)");
+		if (player.getHazardSize() > player.getTreasureSize()) {
+			System.out.println(" :( You have more hazard cards than treasure cards. You Lost. ):");
+		} else {
+			System.out.println(
+					" (: You have more treasure cards than hazard cards.You Won!! Your treasure added to tent. :)");
 			claimTreasures(player.getTreasureBox());
 			System.out.println("Your total point is: " + player.calculateScore());
 		}
